@@ -49,7 +49,7 @@ server.registerResource('使用指南', 'docs://guide', {
   mimeType: 'text/plain'
 }, async () => {
   return {
-    content: [
+    contents: [
       {
         uri: 'docs://guide',
         mimeType: 'text/plain',
