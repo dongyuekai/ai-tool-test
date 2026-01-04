@@ -49,7 +49,7 @@ async function runAgentWithTools(query, maxIterations = 30) {
   ];
 
   for (let i = 0; i < maxIterations; i++) {
-    console.log(`⏳ 正在等待 AI 思考...`);
+    console.log(chalk.bgGreen(`⏳ 正在等待 AI 思考...`));
     const response = await modelWithTools.invoke(messages);
     messages.push(response);
 
