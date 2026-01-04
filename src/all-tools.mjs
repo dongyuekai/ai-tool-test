@@ -1,4 +1,4 @@
-import { tool } from '@langchian/core/tools'
+import { tool } from '@langchain/core/tools'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { spawn } from 'node:child_process'
@@ -31,7 +31,7 @@ const writeFileTool = tool(
       const dir = path.dirname(filePath)
       await fs.mkdir(dir, { recursive: true })
       await fs.writeFile(filePath, content, 'utf-8')
-      console.log(` [工具调用] write)file("${filePath}") - 成功写入 ${content.length} 字节`)
+      console.log(` [工具调用] write_file("${filePath}") - 成功写入 ${content.length} 字节`)
       return `文件写入成功：${filePath}`
     } catch (error) {
       console.log(` [工具调用] write_file("${filePath}") - 错误：${error.message}`)
@@ -52,7 +52,7 @@ const writeFileTool = tool(
 const executeCommandTool = tool(
   async ({ command, workingDirectory }) => {
     const cwd = workingDirectory || process.cwd()
-    console.log(`  [工具调用] execute_command("${commnad}")${workingDirectory ? ` - 工作目录：${workingDirectory}` : ''}`)
+    console.log(`  [工具调用] execute_command("${command}")${workingDirectory ? ` - 工作目录：${workingDirectory}` : ''}`)
     return new Promise((resolve, reject) => {
       // 解析命令和参数
       const [cmd, ...args] = command.split(' ')
