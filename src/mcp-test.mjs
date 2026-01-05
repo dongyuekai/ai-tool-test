@@ -27,6 +27,15 @@ const mcpClient = new MultiServerMCPClient({
     "amap-maps-streamableHTTP": {
       "url": "https://mcp.amap.com/mcp?key=" + process.env.AMAP_MAPS_API_KEY
     },
+    "filesystem": {
+      command: "npx",
+      args: [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/dongyuekai/Desktop/demos/AI_DEV/tool-test",
+        "/Users/dongyuekai/Desktop"
+      ]
+    }
   }
 })
 const tools = await mcpClient.getTools()
@@ -56,8 +65,16 @@ async function runAgentWithTools(query, maxIterations = 30) {
       if (foundTool) {
         const toolResult = await foundTool.invoke(toolCall.args);
 
+        // 确保content是字符串类型
+        let contentStr
+        if (typeof toolResult === 'string') {
+          contentStr = toolResult
+        } else if (toolResult && toolResult.text) {
+          // 如果返回对象有text字段 优先使用
+          contentStr = toolResult.text
+        }
         messages.push(new ToolMessage({
-          content: toolResult,
+          content: contentStr,
           tool_call_id: toolCall.id,
         }));
       }
@@ -66,5 +83,5 @@ async function runAgentWithTools(query, maxIterations = 30) {
 
   return messages[messages.length - 1].content;
 }
-await runAgentWithTools('北京昌平区的自助餐，以及去的路线')
+await runAgentWithTools(`北京昌平区的3个吃自助餐的地方，以及去的路线, 文档保存在/Users/dongyuekai/Desktop的一个md文件`)
 await mcpClient.close()
