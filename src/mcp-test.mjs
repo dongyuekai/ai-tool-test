@@ -35,6 +35,12 @@ const mcpClient = new MultiServerMCPClient({
         "/Users/dongyuekai/Desktop/demos/AI_DEV/tool-test",
         "/Users/dongyuekai/Desktop"
       ]
+    },
+    "chrome-devtools": {
+      command: "bash",
+      args: [
+        "/Users/dongyuekai/.cursor/chrome-devtools-wrapper.sh"
+      ]
     }
   }
 })
@@ -83,5 +89,6 @@ async function runAgentWithTools(query, maxIterations = 30) {
 
   return messages[messages.length - 1].content;
 }
-await runAgentWithTools(`北京昌平区的3个吃自助餐的地方，以及去的路线, 文档保存在/Users/dongyuekai/Desktop的一个md文件`)
+// await runAgentWithTools(`北京昌平区的3个吃自助餐的地方，以及去的路线, 文档保存在/Users/dongyuekai/Desktop的一个md文件`)
+await runAgentWithTools("北京昌平回龙观东大街附近的酒店，最近的 3 个酒店，拿到酒店图片，打开浏览器，展示每个酒店的图片，每个 tab 一个 url 展示，并且在把那个页面标题改为酒店名");
 await mcpClient.close()
