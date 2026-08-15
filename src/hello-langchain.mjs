@@ -4,7 +4,7 @@ import { ChatOpenAI } from "@langchain/openai";
 dotenv.config();
 
 const model = new ChatOpenAI({
-  model: process.env.MODEL_NAME || "qwen-coder-turbo",
+  model: process.env.MODEL_NAME || "qwen3.7-plus",
   apiKey: process.env.OPENAI_API_KEY,
   configuration: {
     baseURL: process.env.OPENAI_BASE_URL,
