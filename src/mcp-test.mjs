@@ -86,7 +86,6 @@ async function runAgentWithTools(query, maxIterations = 30) {
       }
     }
   }
-
   return messages[messages.length - 1].content;
 }
 // await runAgentWithTools(`北京昌平区的3个吃自助餐的地方，以及去的路线, 文档保存在/Users/dongyuekai/Desktop的一个md文件`)

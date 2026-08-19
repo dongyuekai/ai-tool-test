@@ -59,13 +59,23 @@ async function runAgentWithTools(query, maxIterations = 30) {
       const foundTool = tools.find(t => t.name === toolCall.name)
       if (foundTool) {
         const toolResult = await foundTool.invoke(toolCall.args)
+        console.log(chalk.bgCyan(`📝 工具调用参数: ${JSON.stringify(toolCall.args)}`))
+        console.log(chalk.bgCyan(`📝 工具调用结果: ${toolResult}`))
         messages.push(new ToolMessage({
           content: toolResult,
           tool_call_id: toolCall.id
         }))
+        console.log('messages:', messages)
       }
     }
   }
+  // messages数组中最后一个元素就是ToolMessage,格式如下：
+  // ToolMessage {
+  //   "content": "用户信息：\n- ID：002\n- 姓名：李四\n- 邮箱：lisi@example.com\n- 角色：user",
+  //   "additional_kwargs": {},
+  //   "response_metadata": {},
+  //   "tool_call_id": "call_7f23eb1164f74ab9873c9133"
+  // }
   return messages[messages.length - 1].content
 }
 
