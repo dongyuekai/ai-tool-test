@@ -5,7 +5,7 @@ import { HumanMessage, SystemMessage, ToolMessage } from '@langchain/core/messag
 import { readFileTool, writeFileTool, executeCommandTool, listDirectoryTool } from './all-tools.mjs'
 
 const model = new ChatOpenAI({
-  model: process.env.MODEL_NAME || "qwen-turbo-latest",
+  model: process.env.MODEL_NAME || "qwen3.7-plus",
   apiKey: process.env.OPENAI_API_KEY,
   temperature: 0,
   configuration: {
